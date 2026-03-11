@@ -1,0 +1,13 @@
+{
+  "dim": 8,
+  "n_zd_pairs": 0,
+  "n_components": 0,
+  "degree_dist": {},
+  "n_strata": 0,
+  "timings": {
+    "mult_table": 0.012122869491577148,
+    "zd_search": 0.0023641586303710938,
+    "graph": 1.4066696166992188e-05,
+    "analysis": 5.4836273193359375e-06
+  }
+}
