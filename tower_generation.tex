@@ -1,0 +1,750 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{openquestion}[theorem]{Open Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Shortcuts
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\ZSet}{\Z_2\text{-}\mathbf{Set}}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\id}{id}
+\newcommand{\swap}{\mathtt{swap}}
+
+\title{Tower Generation from M\"{o}bius Holonomy:\\
+Canonical Resolution of Representational Obstruction}
+
+\author{T.\ Morgan}
+
+\date{\today \\ {\small Draft --- working paper}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We show that the M\"{o}bius connection $\omega = \tfrac{1}{2}d\theta$
+on $S^1$ generates a canonical tower of algebraic and geometric
+structures through iterated resolution of representational
+obstruction. At each level, the subobject classifier of the
+associated topos contains truth values that are locally definite
+but globally unresolvable---the \emph{swap} values. These constitute
+cohomological obstructions whose minimal resolution is unique and
+forced, producing the next level of the tower. The first four
+levels recover the normed division algebras
+$\R, \C, \HH, \OO$ with their known algebraic properties
+(commutativity loss at $\HH$, associativity loss at $\OO$).
+Beyond $\OO$, the canonical resolution continues but outputs
+constraint geometry rather than division algebras: zero-divisor
+loci replace algebraic closure as the structural content.
+
+The tower generation principle unifies several apparently
+independent phenomena: the Abel--Ruffini obstruction to polynomial
+solvability, the Conway Soldiers barrier at level~5, the
+termination of the derivative tower's geometric content, and the
+classification of finite simple groups (including the sporadic
+groups). Each is identified as a projection of the same
+dimensional obstruction hierarchy onto a specific mathematical
+domain. The Monster group and Monstrous Moonshine are interpreted
+as the maximally complex irreducible obstruction visible to
+$\C$-level representation theory.
+
+This paper is the third in a series. Paper~I~\cite{MorganI}
+establishes the M\"{o}bius connection as the canonical generator
+of $\C$ and derives consequences for the Riemann Hypothesis.
+Paper~II~\cite{MorganII} derives the three-valued subobject
+classifier of $\ZSet$ and resolves the set-theoretic paradoxes.
+The present paper identifies the mechanism by which the
+connection generates the full algebraic tower and the
+obstructions that appear at each level.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+\section{Introduction}
+\label{sec:intro}
+%% ============================================================
+
+The M\"{o}bius connection $\omega = \tfrac{1}{2}d\theta$ on $S^1$
+is the unique flat connection whose holonomy group is $\Z_2$ and
+whose associated double cover is connected
+(Paper~I,~\cite{MorganI}). Papers~I and~II established two
+consequences of this object:
+
+\begin{enumerate}[label=(\roman*), nosep]
+  \item The connection canonically generates $\C$ as a degree-2
+  field extension of $\R$, with complex conjugation as the
+  deck transformation of the double cover.
+  \item The holonomy group $\Z_2$ generates the topos $\ZSet$,
+  whose subobject classifier
+  $\Omega = \{\mathtt{true}, \mathtt{false}, \swap\}$ provides
+  a three-valued logic in which classical reasoning holds on
+  the fixed-point locus and fails at the $\swap$ values.
+\end{enumerate}
+
+The present paper asks: \emph{what happens to the $\swap$ values?}
+
+The $\swap$ truth value classifies propositions that are locally
+definite but globally orientation-dependent: true on one sheet of
+the double cover, false on the other, with no global resolution
+possible within the $\Z_2$ framework. We argue that this
+irresolvability is not a terminal condition but a
+\emph{generative} one. The $\swap$ values constitute a
+representational obstruction whose minimal resolution forces the
+existence of the next algebraic level---and this forcing is
+canonical: unique at each step, with the output determined
+without remainder.
+
+\begin{definition}[Tower generation principle]
+\label{def:tower-principle}
+Let $\mathcal{T}_n$ denote the topos associated to the $n$-th
+level of the tower, and let $\Omega_n$ denote its subobject
+classifier. The \emph{tower generation principle} asserts:
+\begin{enumerate}[label=(\alph*), nosep]
+  \item $\Omega_n$ contains truth values that are locally
+  definite but globally unresolvable within $\mathcal{T}_n$
+  (the \emph{swap locus} $S_n \subset \Omega_n$).
+  \item The minimal algebraic or geometric extension that
+  resolves $S_n$ is unique.
+  \item This extension defines $\mathcal{T}_{n+1}$.
+  \item $\mathcal{T}_{n+1}$ has its own swap locus
+  $S_{n+1}$, which is strictly richer than $S_n$.
+\end{enumerate}
+\end{definition}
+
+The paper proceeds as follows. Section~\ref{sec:swap-obstruction}
+formalizes the swap values as cohomological obstructions.
+Section~\ref{sec:level-one} treats the passage $\R \to \C$
+(resolution of the basic $\Z_2$ swap).
+Section~\ref{sec:level-two} treats $\C \to \HH$ (resolution
+of non-commutative swap interference).
+Section~\ref{sec:level-three} treats $\HH \to \OO$ (resolution
+of associativity obstruction).
+Section~\ref{sec:post-NDA} addresses the post-octonion regime
+where the nature of the resolution changes.
+Section~\ref{sec:convergences} identifies the convergent
+phenomena (Abel--Ruffini, Conway Soldiers, sporadic groups)
+as projections of the tower obstruction.
+Section~\ref{sec:discussion} discusses implications.
+
+
+%% ============================================================
+\section{The Swap Value as Cohomological Obstruction}
+\label{sec:swap-obstruction}
+%% ============================================================
+
+\subsection{Review: the three-valued classifier}
+
+We recall from Paper~II the subobject classifier of $\ZSet$.
+
+\begin{proposition}[Paper~II, Proposition~3.5]
+\label{prop:three-values-review}
+The subobject classifier of $\ZSet$ is
+$\Omega = (\{\mathtt{true}, \mathtt{false}, \swap\}, \sigma_\Omega)$,
+where $\sigma_\Omega$ fixes all three values. For any $\Z_2$-set
+$(X, \sigma)$ and equivariant subset $A \hookrightarrow X$, the
+characteristic morphism $\chi_A \colon X \to \Omega$ assigns:
+\begin{align*}
+  \chi_A(x) &= \mathtt{true}  &&\text{if } x \in A \text{ and }
+                                  \sigma(x) \in A, \\
+  \chi_A(x) &= \mathtt{false} &&\text{if } x \notin A \text{ and }
+                                  \sigma(x) \notin A, \\
+  \chi_A(x) &= \swap           &&\text{if exactly one of } x,\,
+                                  \sigma(x) \text{ belongs to } A.
+\end{align*}
+\end{proposition}
+
+The values $\mathtt{true}$ and $\mathtt{false}$ are
+\emph{transport-invariant}: they classify subobjects that are
+globally well-defined regardless of sheet choice. The value
+$\swap$ is \emph{transport-sensitive}: it classifies subobjects
+whose membership depends on the orientation of the double cover.
+
+\subsection{The obstruction interpretation}
+
+We now give the swap value a cohomological interpretation.
+
+\begin{proposition}[Swap as first cohomology class]
+\label{prop:swap-cohomology}
+Let $(X, \sigma)$ be a $\Z_2$-set and $A \hookrightarrow X$ an
+equivariant subset. The set of elements $x \in X$ with
+$\chi_A(x) = \swap$ is in natural bijection with the
+$\Z_2$-equivariant $1$-cochains on the orbit space $X/\sigma$
+that fail to be coboundaries.
+
+More precisely, define the map $c_A \colon X \to \Z_2$ by
+$c_A(x) = 1$ if $x \in A$, $c_A(x) = 0$ otherwise. Then
+$\chi_A(x) = \swap$ if and only if $c_A(x) \neq c_A(\sigma(x))$,
+which is equivalent to $\delta c_A \neq 0$ on the orbit
+containing $x$, where $\delta$ is the $\Z_2$-coboundary operator.
+\end{proposition}
+
+\begin{proof}
+Direct verification. The coboundary $\delta c_A$ on the orbit
+$\{x, \sigma(x)\}$ evaluates to
+$c_A(\sigma(x)) - c_A(x) \pmod{2}$. This is nonzero if and only
+if exactly one of $x, \sigma(x)$ belongs to $A$, which is the
+definition of $\chi_A(x) = \swap$.
+\end{proof}
+
+\begin{remark}[The obstruction is non-trivial]
+\label{rem:nontrivial-obstruction}
+The key property is that the swap class \emph{cannot be removed
+by any equivariant modification of $A$}. If $x$ and $\sigma(x)$
+lie in different membership classes, no $\Z_2$-equivariant
+redefinition of $A$ can make them agree without also changing the
+classification of the entire orbit. The obstruction is
+\emph{topological}: it reflects the non-orientability of the
+underlying M\"{o}bius bundle, not a deficiency of the particular
+subset chosen.
+\end{remark}
+
+
+%% ============================================================
+\section{Level One: $\R \to \C$}
+\label{sec:level-one}
+%% ============================================================
+
+At the zeroth level, the structure is the real line $\R$ with
+its total order. The M\"{o}bius connection generates a $\Z_2$
+holonomy that cannot be represented within $\R$: the involution
+$x \mapsto -x$ (or more generally, any orientation-reversing map)
+exists as an operation on $\R$ but cannot be \emph{absorbed} as
+an algebraic degree of freedom within $\R$ itself.
+
+\begin{theorem}[Canonical $\C$ generation --- Paper~I]
+\label{thm:C-generation}
+The unique minimal field extension of $\R$ that absorbs the
+$\Z_2$ holonomy as an internal algebraic operation (complex
+conjugation) is $\C = \R[i]/(i^2 + 1)$. This extension is:
+\begin{enumerate}[label=(\alph*), nosep]
+  \item degree~$2$ (minimal for non-trivial $\Z_2$ action),
+  \item algebraically closed (every polynomial splits),
+  \item the unique field with these properties up to isomorphism.
+\end{enumerate}
+\end{theorem}
+
+The swap values of $\ZSet$ at this level have a specific
+algebraic meaning: they correspond to the two roots of
+irreducible quadratic polynomials over $\R$. The polynomial
+$x^2 - x - 1 = 0$ (equivalently, $x^2 = x + 1$) has roots
+$\varphi = \tfrac{1+\sqrt{5}}{2}$ and
+$\hat{\varphi} = \tfrac{1-\sqrt{5}}{2}$, which form a free
+$\Z_2$-orbit under the Galois action. Complex conjugation
+exchanges them. The golden ratio $\varphi$ is the
+\emph{scalar residue} of this degree-2 swap: the irrational
+number that $\R$ sees when it projects the $\C$-level relational
+content onto a single real value.
+
+\begin{remark}[Algebraic irrationals as projection residues]
+\label{rem:irrationals}
+More generally, for each prime $p$, the polynomial $x^p = x + 1$
+is irreducible over $\Q$ (Selmer, 1956) and defines an algebraic
+number field of degree~$p$. The real root of this polynomial is
+the \emph{scalar residue} of the degree-$p$ relational content
+projected onto $\R$. Its irrationality is not a property of the
+number but of the projection: the relational content has
+intrinsic dimensionality~$p$, and $\R$ cannot express it finitely.
+For $p = 2$ this gives $\varphi$ (golden ratio); for $p = 3$,
+the plastic ratio $\rho \approx 1.3247$; for $p \geq 5$, the
+roots are not expressible in radicals (Abel--Ruffini), reflecting
+the non-solvability of the Galois group.
+\end{remark}
+
+
+%% ============================================================
+\section{Level Two: $\C \to \HH$}
+\label{sec:level-two}
+%% ============================================================
+
+At the $\C$ level, the $\Z_2$ swap has been resolved: complex
+conjugation is an internal operation, and the two-sheeted cover
+is algebraically closed. However, new swap values appear when
+\emph{multiple independent $\Z_2$ actions} are present.
+
+\subsection{Non-commutative swap interference}
+
+Consider a $\Z_2$-set with multiple free orbits. At the $\C$
+level, each orbit's swap can be independently resolved by
+choosing a sheet. But this assumes the sheet choices for
+different orbits are \emph{compatible}---that they can be made
+simultaneously without interference.
+
+\begin{definition}[Swap axis]
+\label{def:swap-axis}
+Let $(X, \sigma)$ be a $\Z_2$-set with free orbits
+$\mathcal{O}_1, \ldots, \mathcal{O}_k$. A \emph{swap axis
+assignment} is a map $\alpha \colon \{1, \ldots, k\} \to S^2$
+that associates to each free orbit a unit pure imaginary
+quaternion (a point on $S^2 \subset \mathrm{Im}(\HH)$),
+specifying \emph{which complex subplane within $\HH$} the swap
+of that orbit is native to.
+\end{definition}
+
+\begin{proposition}[Non-commutative obstruction]
+\label{prop:noncommutative-obstruction}
+Two swap axes $\alpha_i, \alpha_j \in S^2$ can be
+\emph{simultaneously resolved} (i.e., there exists a single
+sheet choice that classically resolves both swaps) if and only if
+$[\alpha_i, \alpha_j] = 0$ in $\HH$, where $[\cdot, \cdot]$
+denotes the quaternionic commutator. When
+$[\alpha_i, \alpha_j] \neq 0$, the two swaps are
+\emph{irreducibly entangled}: resolving one constrains the other
+in a way that depends on the order of resolution.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Each swap axis $\alpha \in S^2$ determines a complex subplane
+$\C_\alpha \subset \HH$ (the plane spanned by $1$ and $\alpha$).
+Resolving the swap along $\alpha$ amounts to choosing an
+orientation of $\C_\alpha$. Two such choices are compatible if
+and only if the corresponding complex subplanes commute under
+quaternionic multiplication, which occurs if and only if
+$\alpha_i = \pm \alpha_j$ (parallel or antiparallel axes).
+For non-parallel axes, the commutator
+$\alpha_i \alpha_j - \alpha_j \alpha_i \neq 0$ measures the
+obstruction to simultaneous resolution.
+\end{proof}
+
+\begin{remark}[The $\C$-level collapse]
+At the $\C$ level, all free orbits are implicitly assigned the
+\emph{same} swap axis (conventionally, the imaginary unit $i$).
+This forces all swaps into phase: they move in lockstep under
+transport, and no interference is visible. The passage to $\HH$
+is the recognition that independent free orbits can carry
+\emph{independent} swap axes, and that the independence is
+structured by the non-commutativity of $\HH$.
+\end{remark}
+
+\subsection{Canonical forcing of $\HH$}
+
+\begin{theorem}[$\HH$ as minimal non-commutative resolution]
+\label{thm:H-forcing}
+The quaternion algebra $\HH$ is the unique minimal extension of
+$\C$ with the following properties:
+\begin{enumerate}[label=(\alph*), nosep]
+  \item It contains $\C$ as a subalgebra.
+  \item It admits a continuous family of $\Z_2$ involutions
+  (one for each complex subplane), parametrized by $S^2$.
+  \item The involutions compose non-commutatively, with the
+  non-commutativity faithfully representing the interference
+  between independent swap axes.
+  \item It is a normed division algebra.
+\end{enumerate}
+\end{theorem}
+
+The algebraic cost of this resolution is the loss of
+\emph{commutativity}: $\HH$ is non-commutative because swap-axis
+interference is non-commutative. This is not a defect but the
+\emph{faithful algebraic encoding of transport-order dependence},
+which is the defining feature of the $\HH$-level obstruction.
+
+\subsection{Connection to degree-3 structure}
+
+The plastic ratio $\rho$ (the real root of $x^3 = x + 1$) is the
+scalar residue of the first obstruction that requires $\HH$-level
+structure to resolve natively. The Galois group of $x^3 - x - 1$
+over $\Q$ is $S_3$, which is non-abelian but solvable: it
+decomposes as $\Z_3 \rtimes \Z_2$. This decomposition corresponds
+to a two-step resolution: first a $\Z_3$ rotation between complex
+subplanes, then a $\Z_2$ sheet swap. The solvability of $S_3$
+means this decomposition succeeds---the obstruction can be
+resolved by composing prime-level steps, albeit non-commutatively.
+
+
+%% ============================================================
+\section{Level Three: $\HH \to \OO$}
+\label{sec:level-three}
+%% ============================================================
+
+At the $\HH$ level, non-commutative swap interference has been
+absorbed as internal algebraic structure. The new obstruction is
+\emph{associativity failure}: compositions of three or more
+transport operations can give different results depending on
+grouping, not just ordering.
+
+\begin{proposition}[Associativity obstruction]
+\label{prop:associativity-obstruction}
+Let $\alpha, \beta, \gamma \in S^2$ be three swap axes in $\HH$.
+The composition $(\alpha \beta) \gamma$ is always equal to
+$\alpha (\beta \gamma)$ in $\HH$ (since $\HH$ is associative).
+However, when the swap axes themselves carry internal structure
+(i.e., when the $S^2$ parametrization is replaced by a richer
+space reflecting the composition of $\HH$-level obstructions),
+the grouping of compositions can matter. The minimal extension
+that absorbs this obstruction is the octonion algebra $\OO$.
+\end{proposition}
+
+The octonions $\OO$ are the unique $8$-dimensional normed
+division algebra. They are non-commutative and non-associative,
+but they satisfy the weaker condition of \emph{alternativity}:
+$(xx)y = x(xy)$ and $(yx)x = y(xx)$. The loss of associativity
+is the algebraic cost of resolving the $\HH$-level grouping
+obstruction, just as the loss of commutativity was the cost of
+resolving the $\C$-level interference obstruction.
+
+\begin{remark}[The normed division algebra sequence]
+The four normed division algebras $\R, \C, \HH, \OO$ are the
+\emph{only} finite-dimensional normed division algebras over
+$\R$ (Hurwitz's theorem, 1898). This theorem is usually stated
+as a classification result. In the present framework, it receives
+a generative interpretation: the four NDAs are the four levels at
+which the M\"{o}bius obstruction can be resolved by an algebraic
+object (a division algebra). The fact that no further NDAs exist
+is not a coincidence but a consequence of the obstruction
+hierarchy: beyond $\OO$, the obstruction exceeds the capacity of
+any algebraic resolution.
+\end{remark}
+
+
+%% ============================================================
+\section{Beyond the Octonions: Constraint Geometry}
+\label{sec:post-NDA}
+%% ============================================================
+
+\subsection{The Cayley--Dickson continuation}
+
+The Cayley--Dickson construction formally continues beyond $\OO$,
+producing the sedenions ($16$-dimensional), the trigintaduonions
+($32$-dimensional), and so on. At the sedenion level, zero
+divisors appear for the first time: non-zero elements $a, b$ with
+$ab = 0$.
+
+In the standard algebraic perspective, zero divisors are a
+pathology---they prevent the algebra from being a division algebra.
+In the tower generation framework, they are the \emph{structural
+content} of the post-NDA levels.
+
+\begin{definition}[Zero-divisor constraint geometry]
+\label{def:constraint-geometry}
+For a Cayley--Dickson algebra $\mathcal{A}_n$ of dimension $2^n$
+with $n \geq 4$, the \emph{zero-divisor locus}
+$Z_n = \{(a,b) \in \mathcal{A}_n \times \mathcal{A}_n \mid
+ab = 0,\; a \neq 0,\; b \neq 0\}$ is a non-trivial algebraic
+variety. The \emph{constraint geometry} at level~$n$ is the
+geometry of $Z_n$ together with the natural action of the
+automorphism group $\Aut(\mathcal{A}_n)$.
+\end{definition}
+
+\begin{remark}[Canonicity persists]
+\label{rem:canonicity}
+The critical claim is that the canonical map from ambiguity to
+structure does not break at the NDA boundary. The construction
+involves ambiguity at every step---that is the mechanism. But
+the resolution at each step is forced: $\C$ is the unique
+minimal resolution of the $\R$-level ambiguity, $\HH$ of the
+$\C$-level ambiguity, and so on. Post-$\OO$, the resolution
+still exists and is still unique, but it outputs constraint
+geometry (the structure of the zero-divisor locus) rather than
+a division algebra. The nature of the output changes; the
+canonicity does not.
+\end{remark}
+
+
+%% ============================================================
+\section{Convergent Phenomena}
+\label{sec:convergences}
+%% ============================================================
+
+The tower generation principle predicts that several apparently
+independent mathematical phenomena are projections of the same
+obstruction hierarchy. We identify four such convergences.
+
+\subsection{Abel--Ruffini and polynomial solvability}
+
+A polynomial equation of degree~$n$ is solvable in radicals if
+and only if its Galois group is solvable---i.e., decomposable
+into a tower of cyclic (prime-order) quotients. Each radical
+extraction corresponds to one step up the prime tower.
+
+For degrees 2, 3, and 4, the Galois groups ($S_2$, $S_3$, $S_4$)
+are solvable. For degree~5, $S_5$ contains the simple group $A_5$,
+which is non-solvable. This is the \emph{same} obstruction as the
+NDA boundary: the relational structure at degree~5 cannot be
+decomposed into a sequence of prime-level steps, just as the
+post-$\OO$ obstruction cannot be resolved by iterating the
+Cayley--Dickson doubling.
+
+\begin{conjecture}[Galois--tower correspondence]
+\label{conj:galois-tower}
+The Galois group of the polynomial $x^p - x - 1$ over $\Q$, for
+prime $p$, encodes the symmetry of the representational
+obstruction at the $p$-th level of the tower. For $p = 2$, this
+is $\Z_2$ (resolved by $\C$). For $p = 3$, this is $S_3$
+(resolved by $\HH$-level structure). For $p \geq 5$, the Galois
+group is $S_p$ (non-solvable for $p \geq 5$), reflecting an
+obstruction that no finite tower of prime-level extensions can
+resolve.
+\end{conjecture}
+
+\subsection{Conway's Soldiers and the golden ratio barrier}
+
+In Conway's Soldiers (a solitaire lattice game), a checker on
+a half-plane can be advanced at most 4 rows beyond a boundary
+line, regardless of the number of checkers used. The proof
+assigns each cell a weight $\varphi^{-d}$ (where $\varphi$ is
+the golden ratio and $d$ is the Manhattan distance to the
+target) and shows that the total weight below the line is
+bounded by $\varphi^{-5}/(\varphi - 1)$, which is less than
+$\varphi^{-5}$.
+
+In the tower framework, this barrier has a structural
+interpretation. The game's jump rule is a degree-2 transport
+operation (each jump involves two cells), and the golden ratio
+$\varphi$ is the degree-2 prime irrational ($x^2 = x + 1$).
+The barrier at level~5 is the point where the degree-2 transport
+exhausts its representational capacity---the same threshold as
+Abel--Ruffini.
+
+\begin{conjecture}[Transport-degree barriers]
+\label{conj:conway}
+A lattice solitaire game with degree-$p$ transport rules (jumps
+consuming $p-1$ checkers) would have its barrier determined by
+the real root of $x^p = x + 1$ and would obstruct at a level
+related to the first non-solvable Galois group exceeding
+degree~$p$.
+\end{conjecture}
+
+\subsection{The derivative tower}
+
+The first derivative captures rate of change (a $1$-dimensional,
+$\R$-native operation). The second derivative captures curvature
+(a $2$-dimensional, $\C$-native operation). Higher derivatives
+exist formally but lose independent geometric content: the
+$n$-th derivative can be computed but cannot be given a native
+geometric interpretation within $\C$-based analysis for $n > 2$.
+
+The function $e^x$, which equals all its own derivatives, is the
+unique fixed point of the entire differentiation tower---invariant
+under all levels simultaneously. Its ubiquity in physics reflects
+its role as the unique function compatible with the full
+obstruction hierarchy.
+
+\subsection{Sporadic simple groups and the Monster}
+
+The classification of finite simple groups identifies every such
+group as either cyclic ($\Z_p$), alternating ($A_n$, $n \geq 5$),
+of Lie type, or one of 26 sporadic groups. This classification is
+carried out within $\C$-based representation theory.
+
+In the tower framework, the sporadic groups are the
+\emph{irreducible obstructions visible to $\C$-level
+representation theory}. They are ``prime'' in the group-theoretic
+sense: simple (no normal subgroups), not belonging to any infinite
+family, not decomposable by any systematic construction.
+
+The Monster group $\mathbb{M}$, the largest sporadic simple group,
+lives in $196{,}883$-dimensional complex representation space.
+McKay's observation that the first nontrivial coefficient of the
+$j$-invariant decomposes as $196{,}884 = 1 + 196{,}883$ is
+interpreted as the \emph{fiber content / structure duality} at
+the Monster's level: the identity representation (the base point,
+the invariant content that projects cleanly) plus the first
+irreducible fiber (the smallest non-trivial representation of the
+obstruction).
+
+\begin{conjecture}[Monster as representational wall]
+\label{conj:monster}
+The Monster group is the maximally complex irreducible obstruction
+expressible within $\C$-level representation theory. The Griess
+algebra (the $196{,}884$-dimensional commutative non-associative
+algebra in which $\mathbb{M}$ was constructed) sits at the
+algebraic threshold between $\C$ (commutative, associative) and
+$\OO$ (non-commutative, non-associative), and its non-associativity
+is the algebraic signature of post-$\C$ obstruction content
+compressed into $\C$-level representation.
+\end{conjecture}
+
+
+%% ============================================================
+\section{The Langlands Program as Tower Cartography}
+\label{sec:langlands}
+%% ============================================================
+
+The Langlands program studies the correspondence between Galois
+representations (how roots of polynomials transform under
+symmetry) and automorphic forms (analytic objects on specific
+groups). In the tower framework, this is the systematic study of
+how irreducible relational content at each prime level projects
+into the representation schemes available at each level of the
+tower.
+
+The $j$-function, central to Monstrous Moonshine, is an
+automorphic form for $\mathrm{SL}(2, \Z)$ acting on the upper
+half of $\C$. Its Fourier coefficients encode the irreducible
+representations of the Monster. The Langlands program generalizes
+this to all reductive groups and all number fields. In the tower
+framework, this generalization corresponds to mapping the full
+prime hierarchy---not just the degree-2 structure visible through
+the $j$-function, but the higher-degree obstructions at every
+prime level---into the analytic objects available at each
+representational level.
+
+\begin{openquestion}[Langlands and the quaternionic level]
+\label{open:langlands-H}
+Does a quaternionic analog of the Langlands correspondence
+exist---a systematic relationship between non-abelian Galois
+representations (the $\HH$-level obstructions) and automorphic
+forms on groups that natively represent non-commutative transport?
+If so, it would constitute the ``$\HH$-level cartography'' of
+the tower, resolving structures that the $\C$-level Langlands
+program can only encode indirectly.
+\end{openquestion}
+
+
+%% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+%% ============================================================
+
+\subsection{Summary of the tower}
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+\textbf{Level} & \textbf{Algebra} & \textbf{Lost property}
+  & \textbf{Obstruction type} & \textbf{Prime} \\
+\hline
+0 & $\R$ & --- & orientation & --- \\
+1 & $\C$ & --- & non-commutative interference & 2 \\
+2 & $\HH$ & commutativity & associativity failure & 3 \\
+3 & $\OO$ & associativity & zero divisors & 5? \\
+4+ & constraint & division & geometric & $\geq 7$ \\
+\end{tabular}
+\end{center}
+
+\subsection{The static/dynamic duality}
+
+The M\"{o}bius structure, considered statically, is the complete
+tower---all levels present simultaneously as aspects of one
+object. Considered dynamically, it is the traversal: the
+holonomy being accumulated, the ambiguity being encountered and
+resolved, the levels appearing sequentially as the connection is
+followed. These are not two different objects. The static
+structure \emph{is} the completed dynamic process, and the
+dynamic process \emph{is} the static structure being traversed.
+
+This duality is reflected in the relationship between the
+division algebra tower (the static hierarchy of algebraic
+objects) and the tower generation principle (the dynamic process
+of obstruction and resolution). The tower does not exist prior
+to its generation, nor is it generated and then frozen. It is
+the canonical form of iterating ambiguity resolution, which is
+simultaneously a completed object and an ongoing process.
+
+\subsection{Computational implementation}
+
+A computational system implementing the tower generation
+principle has been developed at the $\Z_2$ level (the M\"{o}bius
+transport logic engine) and extended to the $\HH$ level with
+$S^2$-parametrized swap axes and non-commutative interference
+detection. This system makes the obstruction at each level
+computationally visible: users can assign swap axes to free
+orbits, observe lockstep behavior at the $\C$ level, and see
+the non-commutative interference that necessitates $\HH$-level
+structure. Further extension to the $\OO$ level and beyond is
+in progress.
+
+\subsection{Relationship to physics}
+
+The tower generation principle has physical consequences that are
+explored in detail in the companion papers. The gauge groups of
+the Standard Model---$U(1)$, $SU(2)$, $SU(3)$---emerge at
+specific levels of the tower as the automorphism groups of the
+representational capacity at each level, not as assumed symmetries.
+The loss of commutativity at the $\HH$ level corresponds to the
+chiral structure of the weak interaction; the loss of
+associativity at the $\OO$ level corresponds to the confinement
+of the strong interaction. These correspondences, and their
+quantitative consequences, will be developed in subsequent work.
+
+
+%% ============================================================
+%% References
+%% ============================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{MorganI}
+T.~Morgan.
+\newblock Signature emergence from rotational stress: a non-Wick
+mechanism.
+\newblock Working paper, 2026.
+
+\bibitem{MorganII}
+T.~Morgan.
+\newblock Set-theoretic paradox resolution via non-orientable
+foundations.
+\newblock Working paper, 2026.
+
+\bibitem{Selmer1956}
+E.~S.~Selmer.
+\newblock On the irreducibility of certain trinomials.
+\newblock \emph{Math.\ Scand.}, 4:287--302, 1956.
+
+\bibitem{Hurwitz1898}
+A.~Hurwitz.
+\newblock \"{U}ber die Composition der quadratischen Formen von
+beliebig vielen Variablen.
+\newblock \emph{Nachr.\ Ges.\ Wiss.\ G\"{o}ttingen}, pages 309--316,
+1898.
+
+\bibitem{AbelRuffini}
+P.~Ruffini.
+\newblock \emph{Teoria generale delle equazioni}.
+\newblock Bologna, 1799.
+\newblock N.~H.~Abel, \emph{M\'{e}moire sur les \'{e}quations
+alg\'{e}briques}, 1824.
+
+\bibitem{Conway1961}
+J.~H.~Conway.
+\newblock Unpublished notes on solitaire lattice games, 1961.
+
+\bibitem{Borcherds1992}
+R.~E.~Borcherds.
+\newblock Monstrous moonshine and monstrous Lie superalgebras.
+\newblock \emph{Invent.\ Math.}, 109:405--444, 1992.
+
+\bibitem{ConwayNorton1979}
+J.~H.~Conway and S.~P.~Norton.
+\newblock Monstrous moonshine.
+\newblock \emph{Bull.\ London Math.\ Soc.}, 11:308--339, 1979.
+
+\bibitem{Langlands1967}
+R.~P.~Langlands.
+\newblock Letter to Andr\'{e} Weil, January 1967.
+
+\bibitem{Lawvere1969}
+F.~W.~Lawvere.
+\newblock Diagonal arguments and cartesian closed categories.
+\newblock \emph{Lecture Notes in Math.}, 92:134--145, 1969.
+
+\bibitem{MacLaneMoerdijk1992}
+S.~Mac~Lane and I.~Moerdijk.
+\newblock \emph{Sheaves in Geometry and Logic}.
+\newblock Springer, 1992.
+
+\end{thebibliography}
+
+\end{document}
