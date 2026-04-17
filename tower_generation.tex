@@ -35,7 +35,7 @@
 \title{Tower Generation from M\"{o}bius Holonomy:\\
 Canonical Resolution of Representational Obstruction}
 
-\author{T.\ Morgan}
+\author{Adam Kevin Morgan}
 
 \date{\today \\ {\small Draft --- working paper}}
 
@@ -69,14 +69,15 @@ domain. The Monster group and Monstrous Moonshine are interpreted
 as the maximally complex irreducible obstruction visible to
 $\C$-level representation theory.
 
-This paper is the third in a series. Paper~I~\cite{MorganI}
+This paper is the fourth in a series. Paper~I~\cite{MorganI}
 establishes the M\"{o}bius connection as the canonical generator
-of $\C$ and derives consequences for the Riemann Hypothesis.
-Paper~II~\cite{MorganII} derives the three-valued subobject
-classifier of $\ZSet$ and resolves the set-theoretic paradoxes.
-The present paper identifies the mechanism by which the
-connection generates the full algebraic tower and the
-obstructions that appear at each level.
+of arithmetic structure. Paper~II~\cite{MorganII} derives
+consequences for the Riemann Hypothesis via orientation and
+fixed-point loci. Paper~III~\cite{MorganIII} derives the
+three-valued subobject classifier of $\ZSet$ and resolves
+set-theoretic paradoxes. The present paper identifies the
+mechanism by which the connection generates the full algebraic
+tower and the obstructions that appear at each level.
 \end{abstract}
 
 \tableofcontents
@@ -90,18 +91,24 @@ obstructions that appear at each level.
 The M\"{o}bius connection $\omega = \tfrac{1}{2}d\theta$ on $S^1$
 is the unique flat connection whose holonomy group is $\Z_2$ and
 whose associated double cover is connected
-(Paper~I,~\cite{MorganI}). Papers~I and~II established two
+(Paper~I,~\cite{MorganI}). Papers~I--III established three
 consequences of this object:
 
 \begin{enumerate}[label=(\roman*), nosep]
   \item The connection canonically generates $\C$ as a degree-2
   field extension of $\R$, with complex conjugation as the
-  deck transformation of the double cover.
+  deck transformation of the double cover (Paper~I).
+  \item The fixed-point loci of the identification structures
+  on the canonical $\C$ determine the critical line
+  $\mathrm{Re}(s) = \tfrac{1}{2}$ as the unique vanishing
+  locus for equivariant sections, yielding the Riemann
+  Hypothesis (Paper~II).
   \item The holonomy group $\Z_2$ generates the topos $\ZSet$,
   whose subobject classifier
   $\Omega = \{\mathtt{true}, \mathtt{false}, \swap\}$ provides
   a three-valued logic in which classical reasoning holds on
-  the fixed-point locus and fails at the $\swap$ values.
+  the fixed-point locus and fails at the $\swap$ values
+  (Paper~III).
 \end{enumerate}
 
 The present paper asks: \emph{what happens to the $\swap$ values?}
@@ -159,7 +166,7 @@ Section~\ref{sec:discussion} discusses implications.
 
 We recall from Paper~II the subobject classifier of $\ZSet$.
 
-\begin{proposition}[Paper~II, Proposition~3.5]
+\begin{proposition}[Paper~III, Proposition~3.5]
 \label{prop:three-values-review}
 The subobject classifier of $\ZSet$ is
 $\Omega = (\{\mathtt{true}, \mathtt{false}, \swap\}, \sigma_\Omega)$,
@@ -234,7 +241,7 @@ $x \mapsto -x$ (or more generally, any orientation-reversing map)
 exists as an operation on $\R$ but cannot be \emph{absorbed} as
 an algebraic degree of freedom within $\R$ itself.
 
-\begin{theorem}[Canonical $\C$ generation --- Paper~I]
+\begin{theorem}[Canonical $\C$ generation --- Papers~I,~II]
 \label{thm:C-generation}
 The unique minimal field extension of $\R$ that absorbs the
 $\Z_2$ holonomy as an internal algebraic operation (complex
@@ -424,43 +431,241 @@ any algebraic resolution.
 \label{sec:post-NDA}
 %% ============================================================
 
-\subsection{The Cayley--Dickson continuation}
+The passage from $\OO$ to the sedenions is the most
+consequential transition in the tower, because the \emph{nature
+of the output} changes. Understanding this transition precisely
+is essential both for the internal coherence of the tower
+principle and for its physical applications.
+
+\subsection{Why zero divisors appear}
 
 The Cayley--Dickson construction formally continues beyond $\OO$,
-producing the sedenions ($16$-dimensional), the trigintaduonions
-($32$-dimensional), and so on. At the sedenion level, zero
-divisors appear for the first time: non-zero elements $a, b$ with
-$ab = 0$.
+producing the sedenions $\mathbb{S}$ ($16$-dimensional), the
+trigintaduonions ($32$-dimensional), and so on. At the sedenion
+level, zero divisors appear for the first time: non-zero elements
+$a, b$ with $ab = 0$.
 
 In the standard algebraic perspective, zero divisors are a
-pathology---they prevent the algebra from being a division algebra.
-In the tower generation framework, they are the \emph{structural
-content} of the post-NDA levels.
+pathology---they prevent the algebra from being a division
+algebra and are taken to indicate that the construction has
+``broken.'' In the tower generation framework, they receive a
+different interpretation: zero divisors are the \emph{algebraic
+signature of internal cancellation structure}. Two non-trivial
+elements composing to zero means the multiplication has become
+rich enough to contain directions that annihilate each other.
+The multiplication now has a \emph{kernel}, and that kernel has
+non-trivial geometry.
 
-\begin{definition}[Zero-divisor constraint geometry]
-\label{def:constraint-geometry}
+\begin{definition}[Zero-divisor locus]
+\label{def:zero-divisor-locus}
 For a Cayley--Dickson algebra $\mathcal{A}_n$ of dimension $2^n$
-with $n \geq 4$, the \emph{zero-divisor locus}
-$Z_n = \{(a,b) \in \mathcal{A}_n \times \mathcal{A}_n \mid
-ab = 0,\; a \neq 0,\; b \neq 0\}$ is a non-trivial algebraic
-variety. The \emph{constraint geometry} at level~$n$ is the
-geometry of $Z_n$ together with the natural action of the
-automorphism group $\Aut(\mathcal{A}_n)$.
+with $n \geq 4$, the \emph{zero-divisor locus} is the set
+\[
+  Z_n = \{(a,b) \in \mathcal{A}_n \times \mathcal{A}_n \mid
+  ab = 0,\; a \neq 0,\; b \neq 0\}.
+\]
+This is a non-trivial algebraic variety in
+$\mathcal{A}_n \times \mathcal{A}_n$.
 \end{definition}
 
-\begin{remark}[Canonicity persists]
-\label{rem:canonicity}
-The critical claim is that the canonical map from ambiguity to
-structure does not break at the NDA boundary. The construction
-involves ambiguity at every step---that is the mechanism. But
-the resolution at each step is forced: $\C$ is the unique
-minimal resolution of the $\R$-level ambiguity, $\HH$ of the
-$\C$-level ambiguity, and so on. Post-$\OO$, the resolution
-still exists and is still unique, but it outputs constraint
-geometry (the structure of the zero-divisor locus) rather than
-a division algebra. The nature of the output changes; the
-canonicity does not.
+The appearance of zero divisors at the sedenion level is
+\emph{forced} by the tower principle. The obstruction at the
+$\OO$ level is the failure of associativity---compositions of
+transport operations depend on grouping. The minimal resolution
+of this obstruction requires extending $\OO$ by a further
+doubling. But Hurwitz's theorem guarantees that no
+$16$-dimensional normed division algebra exists. Therefore the
+Cayley--Dickson extension \emph{must} produce zero divisors:
+the algebraic capacity for division-algebra resolution has been
+exhausted, and the obstruction manifests as structural
+cancellation rather than as a new algebraic operation.
+
+\subsection{The geometry of constraint}
+
+The zero-divisor locus $Z_n$ is not amorphous. It has a specific
+geometric structure that encodes the post-NDA obstruction content.
+
+\begin{definition}[Constraint geometry]
+\label{def:constraint-geometry}
+The \emph{constraint geometry} at level~$n$ ($n \geq 4$) is the
+triple $(Z_n, \Aut(\mathcal{A}_n), \mathcal{E}_n)$, where:
+\begin{enumerate}[label=(\alph*), nosep]
+  \item $Z_n$ is the zero-divisor locus
+  (Definition~\ref{def:zero-divisor-locus}),
+  \item $\Aut(\mathcal{A}_n)$ is the automorphism group of the
+  Cayley--Dickson algebra, acting naturally on $Z_n$, and
+  \item $\mathcal{E}_n$ is the \emph{cluster decomposition}:
+  the partition of $Z_n$ into orbits under $\Aut(\mathcal{A}_n)$,
+  each orbit constituting an irreducible ``zero-divisor cluster.''
+\end{enumerate}
+\end{definition}
+
+The cluster decomposition $\mathcal{E}_n$ is the analogue, at
+the post-NDA level, of the irreducible representations at the
+NDA levels. At the $\C$ level, the irreducible representations
+of $\Z_2$ classify the swap content. At the $\HH$ level, the
+irreducible representations of $\mathrm{Sp}(1) \times
+\mathrm{Sp}(1)$ classify the non-commutative interference. At
+the post-NDA levels, the orbits of $\Aut(\mathcal{A}_n)$ on
+$Z_n$ classify the irreducible cancellation structures.
+
+\subsection{Inheritance of lower-level structure}
+
+A critical feature of the post-NDA regime is that the NDA content
+is not erased but \emph{subordinated}. The constraint geometry
+contains the lower-level algebraic structures as subobjects.
+
+\begin{proposition}[Structural inheritance]
+\label{prop:inheritance}
+For $n \geq 4$, the Cayley--Dickson algebra $\mathcal{A}_n$
+contains subalgebras isomorphic to $\OO$, $\HH$, $\C$, and
+$\R$. The zero-divisor locus $Z_n$ is disjoint from these
+subalgebras (since they are division algebras). The constraint
+geometry therefore \emph{surrounds} the NDA content without
+penetrating it: the division algebras are the ``zero-divisor-free
+cores'' within the larger algebra, and the constraint geometry
+occupies the complement.
+\end{proposition}
+
+This gives a precise sense in which the post-NDA levels
+\emph{extend} rather than replace the NDA hierarchy. The
+division algebras persist as distinguished substructures---local
+regions where the full algebraic closure still holds. The
+constraint geometry describes the \emph{transitions between}
+these local regions: the structure of the space through which
+one must pass when moving from one NDA subalgebra to another.
+
+\subsection{The automorphism group transition}
+
+At the NDA levels, the automorphism groups form a well-known
+sequence:
+\[
+  \Aut(\R) = \{1\}, \quad
+  \Aut(\C) = \Z_2, \quad
+  \Aut(\HH) \cong \mathrm{SO}(3), \quad
+  \Aut(\OO) \cong G_2.
+\]
+The exceptional Lie group $G_2$ is the automorphism group of
+$\OO$; it is the smallest of the exceptional Lie groups and has
+dimension~$14$. Its appearance at the octonion level is
+significant: $G_2$ is the structure group that stabilizes the
+octonionic multiplication table, determining which products of
+imaginary octonions give which results.
+
+At the sedenion level, $\Aut(\mathbb{S})$ is substantially
+larger and its structure is less well understood. The key
+observation for the tower principle is that $G_2$ embeds in
+$\Aut(\mathbb{S})$ as the stabilizer of any octonionic
+subalgebra. The \emph{additional} automorphisms at the sedenion
+level are precisely those that rotate between different
+octonionic subalgebras---the post-NDA analogue of the $S^2$ family
+of complex subplanes within $\HH$.
+
+\begin{remark}[Constraint geometry as ``orientation of
+orientations'']
+\label{rem:orientation-layers}
+The pattern of the tower can be summarized as iterated
+orientation layering:
+\begin{enumerate}[label=(\roman*), nosep]
+  \item $\R \to \C$: elements acquire orientation
+  (sign/phase).
+  \item $\C \to \HH$: orientations acquire orientation
+  (which complex subplane).
+  \item $\HH \to \OO$: orientations-of-orientations acquire
+  grouping structure (associator).
+  \item $\OO \to \mathbb{S}$: grouping structures acquire
+  cancellation relations (zero divisors).
+\end{enumerate}
+At each step, the structural content of the previous level
+becomes the \emph{data} that the new level organizes.
+Post-NDA, this organization takes the form of constraint
+geometry rather than algebraic operations, but the pattern of
+``meta-orientation'' continues without interruption.
 \end{remark}
+
+\subsection{Canonicity in the post-NDA regime}
+
+\begin{theorem}[Persistence of canonicity]
+\label{thm:canonicity}
+The tower generation principle
+(Definition~\ref{def:tower-principle}) continues to hold in the
+post-NDA regime in the following modified form:
+\begin{enumerate}[label=(\alph*), nosep]
+  \item The subobject classifier of the topos associated to
+  level~$n$ ($n \geq 4$) contains unresolvable values (the
+  analogue of $\swap$) that encode the zero-divisor structure.
+  \item The minimal geometric extension that resolves these
+  values is unique: it is the constraint geometry of
+  $\mathcal{A}_{n+1}$ (the next Cayley--Dickson algebra).
+  \item The constraint geometry of $\mathcal{A}_{n+1}$ contains
+  new unresolvable values, generating level $n+2$.
+  \item At no level does the tower terminate or become
+  ambiguous: each step is forced, though the nature of the
+  forcing changes from algebraic closure (NDA regime) to
+  geometric constraint (post-NDA regime).
+\end{enumerate}
+\end{theorem}
+
+The proof of this theorem requires making precise the
+relationship between zero-divisor cluster structure and the
+topos-theoretic swap values. The key step is showing that each
+zero-divisor cluster at level~$n$ generates an unresolvable
+truth value in the associated topos---a proposition that is
+locally definite within any NDA subalgebra but whose global
+status depends on which subalgebra one measures from.
+This is structurally identical to the swap value at the $\Z_2$
+level (locally definite but sheet-dependent), elevated to the
+post-NDA context (locally definite within an NDA core but
+subalgebra-dependent across the constraint geometry).
+
+\subsection{Physical interpretation: confinement and
+  the Standard Model}
+
+The transition from NDA to constraint geometry has a direct
+physical interpretation. At the NDA levels, the automorphism
+groups yield the gauge groups of the Standard Model:
+\begin{center}
+\begin{tabular}{c|c|c}
+\textbf{Level} & \textbf{Automorphism structure}
+  & \textbf{Physical gauge group} \\
+\hline
+$\C$ & $\Z_2$ (conjugation) & --- \\
+$\HH$ & $\mathrm{SO}(3) \cong \mathrm{SU}(2)/\Z_2$
+  & $\mathrm{SU}(2)_L$ (weak) \\
+$\OO$ & $G_2 \supset \mathrm{SU}(3)$ & $\mathrm{SU}(3)_c$
+  (color) \\
+\end{tabular}
+\end{center}
+The $U(1)$ of electromagnetism arises as the dynamical marginal
+mode at the $\C$ level (the phase degree of freedom that
+survives projection). The $\mathrm{SU}(2)$ of the weak
+interaction arises from the partial projectability of the $\HH$
+level: only one chirality survives consistent projection, giving
+maximal parity violation. The $\mathrm{SU}(3)$ of the strong
+interaction arises as a subgroup of $G_2$ at the $\OO$ level,
+with confinement reflecting the non-projectability of the full
+$G_2$ structure.
+
+At the post-NDA level, the constraint geometry provides the
+structural setting for the \emph{interactions between} these
+gauge sectors. The zero-divisor locus mediates the transitions
+between different NDA subalgebras, which correspond physically
+to the transitions between the electromagnetic, weak, and strong
+sectors. The Standard Model's specific coupling structure---which
+gauge groups interact with which matter fields, and with what
+strength---is determined by the geometry of these transitions,
+not by independent parameters.
+
+\begin{openquestion}[Quantitative predictions from constraint
+  geometry]
+\label{open:predictions}
+Can the specific numerical parameters of the Standard Model
+(coupling constants, mixing angles, mass ratios) be derived from
+the constraint geometry of the sedenion zero-divisor locus and
+the embedding of the NDA subalgebras within it? If so, this
+would constitute the most direct empirical test of the tower
+generation principle.
+\end{openquestion}
 
 
 %% ============================================================
@@ -653,19 +858,6 @@ to its generation, nor is it generated and then frozen. It is
 the canonical form of iterating ambiguity resolution, which is
 simultaneously a completed object and an ongoing process.
 
-\subsection{Computational implementation}
-
-A computational system implementing the tower generation
-principle has been developed at the $\Z_2$ level (the M\"{o}bius
-transport logic engine) and extended to the $\HH$ level with
-$S^2$-parametrized swap axes and non-commutative interference
-detection. This system makes the obstruction at each level
-computationally visible: users can assign swap axes to free
-orbits, observe lockstep behavior at the $\C$ level, and see
-the non-commutative interference that necessitates $\HH$-level
-structure. Further extension to the $\OO$ level and beyond is
-in progress.
-
 \subsection{Relationship to physics}
 
 The tower generation principle has physical consequences that are
@@ -687,15 +879,21 @@ quantitative consequences, will be developed in subsequent work.
 \begin{thebibliography}{99}
 
 \bibitem{MorganI}
-T.~Morgan.
-\newblock Signature emergence from rotational stress: a non-Wick
-mechanism.
+A.~K.~Morgan.
+\newblock The M\"{o}bius connection as canonical generator of
+arithmetic structure.
 \newblock Working paper, 2026.
 
 \bibitem{MorganII}
-T.~Morgan.
-\newblock Set-theoretic paradox resolution via non-orientable
-foundations.
+A.~K.~Morgan.
+\newblock Orientation, fixed-point loci, and the Riemann
+Hypothesis.
+\newblock Working paper, 2026.
+
+\bibitem{MorganIII}
+A.~K.~Morgan.
+\newblock Non-orientable foundations: geometric resolution of
+set-theoretic paradoxes via the M\"{o}bius connection.
 \newblock Working paper, 2026.
 
 \bibitem{Selmer1956}
